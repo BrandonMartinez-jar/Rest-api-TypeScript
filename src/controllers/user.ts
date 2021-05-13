@@ -11,7 +11,7 @@ export async function getUsers(req: Request, res: Response){
 export async function getUser(req: Request, res: Response){
     const { id } = req.params;
     const con = await connect();
-    const usuario = con.query('SELECT * FROM usuarios WHERE id = ?', [id])
+    const usuario = await con.query('SELECT * FROM usuarios WHERE id = ?', [id])
     return usuario ? res.status(200).json( usuario ) : res.status(404).json({msg:'no existe el usuario'});
 }
 

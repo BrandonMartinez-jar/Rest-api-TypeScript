@@ -9,18 +9,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.connect = void 0;
-const promise_1 = require("mysql2/promise");
-function connect() {
+exports.getProfile = exports.singIn = exports.singUp = void 0;
+function singUp(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const connection = yield promise_1.createPool({
-            host: process.env.HOST,
-            user: process.env.DB_USER,
-            database: process.env.DB_NAME,
-            password: process.env.DB_PWD,
-            connectionLimit: 10
-        });
-        return connection;
     });
 }
-exports.connect = connect;
+exports.singUp = singUp;
+function singIn(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+    });
+}
+exports.singIn = singIn;
+function getProfile(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+    });
+}
+exports.getProfile = getProfile;

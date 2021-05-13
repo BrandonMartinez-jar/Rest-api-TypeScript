@@ -1,9 +1,10 @@
 import express, { Application } from 'express';
-import indexRoutes from '../routes/index';
+import indexRoute from '../routes/index';
 import userRoutes from '../routes/user';
 import kartRoutes from '../routes/kart';
 import productRoutes from '../routes/product';
 import orderRoutes from '../routes/order';
+import authRoutes from '../routes/auth';
 import morgan from 'morgan';
 const pkg = require('../../package.json');
 
@@ -19,14 +20,15 @@ export class Server{
         users: '/api/users',
         products: '/api/products',
         orders: '/api/orders',
-        karts: '/api/karts'
+        karts: '/api/karts',
+        auth: '/api/auth'
     }
     
     constructor(private port?: number | string){
         this.app = express();
         this.settings();
-        this.routes();
         this.middlewares();
+        this.routes();
     }
 
     settings(){
@@ -34,11 +36,12 @@ export class Server{
         this.app.set('pkg', pkg);
     }
     routes(){
-        this.app.use(this.ApiPaths.home, indexRoutes);
+        this.app.use(this.ApiPaths.home, indexRoute);
         this.app.use(this.ApiPaths.users, userRoutes);
         this.app.use(this.ApiPaths.products, productRoutes);
         this.app.use(this.ApiPaths.orders, orderRoutes);
         this.app.use(this.ApiPaths.karts, kartRoutes);
+        this.app.use(this.ApiPaths.auth, authRoutes);
         Server.Pkg = this.app.get('pkg');
     }
 

@@ -19,6 +19,7 @@ const user_1 = __importDefault(require("../routes/user"));
 const kart_1 = __importDefault(require("../routes/kart"));
 const product_1 = __importDefault(require("../routes/product"));
 const order_1 = __importDefault(require("../routes/order"));
+const auth_1 = __importDefault(require("../routes/auth"));
 const morgan_1 = __importDefault(require("morgan"));
 const pkg = require('../../package.json');
 class Server {
@@ -29,12 +30,13 @@ class Server {
             users: '/api/users',
             products: '/api/products',
             orders: '/api/orders',
-            karts: '/api/karts'
+            karts: '/api/karts',
+            auth: '/api/auth'
         };
         this.app = express_1.default();
         this.settings();
-        this.routes();
         this.middlewares();
+        this.routes();
     }
     settings() {
         this.app.set('port', this.port || process.env.PORT || 3000);
@@ -46,6 +48,7 @@ class Server {
         this.app.use(this.ApiPaths.products, product_1.default);
         this.app.use(this.ApiPaths.orders, order_1.default);
         this.app.use(this.ApiPaths.karts, kart_1.default);
+        this.app.use(this.ApiPaths.auth, auth_1.default);
         Server.Pkg = this.app.get('pkg');
     }
     listen() {

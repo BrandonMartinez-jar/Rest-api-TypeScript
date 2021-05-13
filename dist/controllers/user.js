@@ -23,7 +23,7 @@ function getUser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const { id } = req.params;
         const con = yield db_1.connect();
-        const usuario = con.query('SELECT * FROM usuarios WHERE id = ?', [id]);
+        const usuario = yield con.query('SELECT * FROM usuarios WHERE id = ?', [id]);
         return usuario ? res.status(200).json(usuario) : res.status(404).json({ msg: 'no existe el usuario' });
     });
 }
